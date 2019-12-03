@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="catchNullException-one">
+        <![CDATA[
+        public class Example {
+		    public String  fn(AgreementBodyVO vo) {
+            try {
+                String artificialPerson = vo.getArtificialPerson();
+
+            }catch (NullPointerException e){
+                return null;
+            }
+            return "";
+    }
+		}
+		]]>
+    </code-fragment>
+    <test-code>
+        <description>NullPointerException 应该用代码规避，而不是用捕获异常的方式处理。</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>2</expected-linenumbers>
+        <code-ref id="catchNullException-one" />
+    </test-code>
+</test-data>

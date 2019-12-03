@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="systemprint-one">
+        <![CDATA[
+        public class Example {
+		    public static String parseStrToString(String time, String timeFromat,String timeFromat2) {
+        if (time == null || ("").equals(time)) {
+            return null;
+        }
+        Date date = null;
+        String d = "";
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(timeFromat);
+            date = dateFormat.parse(time);
+            DateFormat dateFormat1 = new SimpleDateFormat(timeFromat2);
+            d = dateFormat1.format(date);
+        } catch (Exception e) {
+            log.error(" time parse error {}",e.getMessage(),e);
+        }
+        return d;
+    }
+	    }
+		]]>
+    </code-fragment>
+    <test-code>
+        <description>用Log 替换System.out.print()</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>3</expected-linenumbers>
+        <code-ref id="systemprint-one" />
+    </test-code>
+
+    <!--<code-fragment id="systemprint-two">-->
+        <!--<![CDATA[-->
+        <!--public class Example {-->
+		    <!--public void fn() {-->
+		       <!--System.out.println("");-->
+		    <!--}-->
+	    <!--}-->
+		<!--]]>-->
+    <!--</code-fragment>-->
+    <!--<test-code>-->
+        <!--<description> 用Log 替换System.out.print()</description>-->
+        <!--<expected-problems>1</expected-problems>-->
+        <!--<expected-linenumbers>3</expected-linenumbers>-->
+        <!--<code-ref id="systemprint-two" />-->
+    <!--</test-code>-->
+
+</test-data>

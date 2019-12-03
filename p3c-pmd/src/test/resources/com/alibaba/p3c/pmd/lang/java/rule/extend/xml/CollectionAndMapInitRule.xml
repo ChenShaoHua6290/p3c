@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="collectionAndMap-one">
+        <![CDATA[
+	public class Example {
+		public void fn() {
+			List<String> list = new ArrayList();
+			HashMap<String, String> map = new HashMap<String,String>();
+		}
+	}
+        ]]>
+    </code-fragment>
+    <test-code>
+        <description> list 和map 初始化</description>
+        <expected-problems>2</expected-problems>
+        <expected-linenumbers>3,4</expected-linenumbers>
+        <code-ref id="collectionAndMap-one" />
+    </test-code>
+
+    <code-fragment id="collectionAndMap-two">
+        <![CDATA[
+        public class Example {
+		    public void fn(int a,int b,int g) {
+		    List<String> list =Lists.newArrayList();
+			HashMap<String, String> map = Maps.newHashMap();
+		    }
+	    }
+		]]>
+    </code-fragment>
+    <test-code>
+        <description> list 和map 初始化</description>
+        <expected-problems>0</expected-problems>
+        <!--<expected-linenumbers>3,4</expected-linenumbers>-->
+        <code-ref id="collectionAndMap-two" />
+    </test-code>
+
+</test-data>

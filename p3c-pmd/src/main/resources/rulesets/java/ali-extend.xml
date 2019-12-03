@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<ruleset name="Mycustomrules" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    <description>AlibabaJavaConstants</description>
+
+    <!--<rule name="MapPrimaryKeysAndValuesRule"-->
+          <!--message="Avoid using 'while' statements without curly braces"-->
+          <!--class="com.alibaba.p3c.pmd.lang.java.rule.extend.MapPrimaryKeysAndValuesRule">-->
+        <!--<description>-->
+            <!--Avoid using 'while' statements without using curly braces-->
+        <!--</description>-->
+        <!--<priority>3</priority>-->
+
+        <!--<example>-->
+            <!--<![CDATA[-->
+<!--当循环中只需要 Map 的主键时，迭代 keySet() 是正确的。但是，当需要主键和取值时，迭代 entrySet() 才是更高效的做法，比先迭代 keySet() 后再去 get 取值性能更佳。-->
+<!--反例：-->
+<!--Map<String, String> map = ...;-->
+<!--for (String key : map.keySet()) {-->
+    <!--String value = map.get(key);-->
+    <!--...-->
+<!--}-->
+
+<!--正例：-->
+<!--Map<String, String> map = ...;-->
+<!--for (Map.Entry<String, String> entry : map.entrySet()) {-->
+    <!--String key = entry.getKey();-->
+    <!--String value = entry.getValue();-->
+    <!--...-->
+<!--}-->
+        <!--]]>-->
+        <!--</example>-->
+    <!--</rule>-->
+
+
+    <!-- null 的使用判断 -->
+    <rule name="EntityNullRule"
+          language="java"
+          message="java.extend.EntityNullRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.EntityNullRule">
+        <priority>3</priority>
+        <example>
+            <![CDATA[
+            Negative example:
+	public class Example {
+		public void fn() {
+			String url = null;
+			if(url==null){
+			    return;
+			}
+		}
+	}
+        ]]>
+        </example>
+        <example>
+            <![CDATA[
+            Positive example:
+	public class Example {
+		public void fn() {
+			String url = null;
+			if(StringUtils.isEmpty(url)){
+			    return;
+			}
+		}
+	}
+        ]]>
+        </example>
+    </rule>
+    <!-- list和map 的初始化  -->
+    <rule name="CollectionAndMapInitRule"
+          language="java"
+          message="java.extend.CollectionAndMapInitRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.CollectionAndMapInitRule">
+        <priority>3</priority>
+        <example>
+            <![CDATA[
+             Negative example:
+	public class Example {
+		public void fn() {
+			List<String> list = new ArrayList;
+			HashMap<String, String> map = new HashMap<String,String>();
+		}
+	}
+        ]]>
+        </example>
+        <example>
+            <![CDATA[
+             Positive example:
+	public class Example {
+		public void fn() {
+			List<String> list = Lists.newArrayList();
+			HashMap<String, String> map = Maps.newHashMap();
+		}
+	}
+        ]]>
+        </example>
+    </rule>
+    <!-- import 时 通配符的禁止-->
+    <rule name="ImportPackageAllRule"
+          language="java"
+          message="java.extend.ImportPackageAllRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.ImportPackageAllRule">
+        <priority>3</priority>
+        <example>
+            <![CDATA[
+           Negative  example:
+            import java.util.*;
+        ]]>
+        </example>
+        <example>
+            <![CDATA[
+           Positive  example:
+            import java.util.HashMap;
+        ]]>
+        </example>
+    </rule>
+    <!-- 方法的参数 -->
+    <rule name="MethodParamsNumRule"
+          language="java"
+          message="java.extend.MethodParamsNumRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.MethodParamsNumRule">
+        <priority>2</priority>
+        <example>
+            <![CDATA[
+     Negative  example:
+	public class Example {
+		public void fn(int a, int b, int c,int d, int f, int g) {
+		}
+	}
+        ]]>
+        </example>
+        <example>
+            <![CDATA[
+     Positive  example:
+	public class Example {
+		public void fn(Params p) {
+		}
+	}
+        ]]>
+        </example>
+    </rule>
+    <!--捕获空指针异常  -->
+    <rule name="CatchNullExceptionRule"
+          language="java"
+          message="java.extend.CatchNullExceptionRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.CatchNullExceptionRule">
+        <priority>2</priority>
+        <example>
+            <![CDATA[
+            Negative example:
+	public class Example {
+		public void fn() {
+			try {
+                return user.getName();
+            } catch (NullPointerException e) {
+                return null;
+            }
+		}
+        ]]>
+		</example>
+        <example>
+            <![CDATA[
+            Positive example:
+	public class Example {
+		public void fn() {
+			if (Objects.isNull(user)) {
+                return null;
+            }
+		}
+	}
+        ]]>
+        </example>
+    </rule>
+
+    <!--String.split()  -->
+    <rule name="StringSplitRule"
+          language="java"
+          message="java.extend.StringSplitRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.StringSplitRule">
+        <priority>3</priority>
+        <example>
+            <![CDATA[
+            Negative example:
+	public class Example {
+		public void fn() {
+			s.split(".");
+		}
+	}
+        ]]>
+        </example>
+        <example>
+            <![CDATA[
+            Positive example:
+	public class Example {
+		public void fn() {
+		    s.split("\\.");
+		}
+	}
+        ]]>
+
+        </example>
+    </rule>
+    <!--String.split()  -->
+    <rule name="SystemPrintRule"
+          language="java"
+          message="java.extend.SystemPrintRule.rule.msg"
+          class="com.alibaba.p3c.pmd.lang.java.rule.extend.SystemPrintRule">
+        <priority>2</priority>
+        <example>
+            <![CDATA[
+            Negative example:
+	public class Example {
+		public void fn() {
+            System.out.print("");
+		}
+	}
+        ]]>
+        </example>
+        <example>
+            <![CDATA[
+            Positive example:
+	public class Example {
+	    public static Logger log = LoggerFactory.getLoger(Example.class);
+		public void fn() {
+		    log.info("");
+		}
+	}
+        ]]>
+        </example>
+    </rule>
+</ruleset>

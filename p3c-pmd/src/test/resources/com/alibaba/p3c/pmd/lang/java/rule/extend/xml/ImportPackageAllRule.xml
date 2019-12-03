@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="import-one">
+        <![CDATA[
+        import java.util.*;
+		]]>
+    </code-fragment>
+    <test-code>
+        <description>import不要使用通配符 *</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>1</expected-linenumbers>
+        <code-ref id="import-one" />
+    </test-code>
+
+</test-data>

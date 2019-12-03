@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <!--<code-fragment id="check-entity-null-one">-->
+        <!--<![CDATA[-->
+	<!--public class Example {-->
+		<!--public void fn() {-->
+			<!--//String url = null;-->
+			<!--if(url==null){-->
+			    <!--return;-->
+			<!--}-->
+		<!--}-->
+	<!--}-->
+		<!--]]>-->
+    <!--</code-fragment>-->
+    <!--<test-code>-->
+        <!--<description>It is recommended to encapsulate the class to determine whether it is null    </description>-->
+        <!--<expected-problems>1</expected-problems>-->
+        <!--<expected-linenumbers>4</expected-linenumbers>-->
+        <!--<code-ref id="check-entity-null-one" />-->
+    <!--</test-code>-->
+
+
+    <code-fragment id="check-entity-null-two">
+        <![CDATA[
+	public class Example {
+		public void fn() {
+			String url = null;
+			if(url!=null && url=="123"){
+			    return;
+			}
+		}
+	}
+		]]>
+    </code-fragment>
+    <test-code>
+        <description>It is recommended to encapsulate the class to determine whether it is null    </description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>4</expected-linenumbers>
+        <code-ref id="check-entity-null-two" />
+    </test-code>
+
+</test-data>

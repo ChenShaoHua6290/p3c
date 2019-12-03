@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="stringsplit-one">
+        <![CDATA[
+        public class Example {
+		    public void fn() {
+		       String[] sp = "abc.abc".split(".");
+		    }
+	    }
+		]]>
+    </code-fragment>
+    <test-code>
+        <description>使用String.split()方法,注意正则表达式</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>3</expected-linenumbers>
+        <code-ref id="stringsplit-one" />
+    </test-code>
+
+    <code-fragment id="stringsplit-two">
+        <![CDATA[
+        public class Example {
+		    public void fn() {
+		     String[] sp = s.split(".");
+		    }
+	    }
+		]]>
+    </code-fragment>
+    <test-code>
+        <description>使用String.split()方法,注意正则表达式</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>3</expected-linenumbers>
+        <code-ref id="stringsplit-two" />
+    </test-code>
+
+</test-data>
